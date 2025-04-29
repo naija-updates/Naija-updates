@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Naija updates</title>
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+</head>
+<body>
+
+  <header>
+    <div class="logo">Naija updates</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="entertainment.html">Entertainment</a>
+      <a href="sports.html">Sports</a>
+      <a href="health.html">Health</a>
+    </nav>
+  </header>
+
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider"></span>
+    </label>
+    <div class="mode-label" id="mode-label">Light Mode</div>
+  </div>
+
+  <section class="carousel">
+    <div class="carousel-track" id="bulletin-track">
+      <div class="carousel-item">Loading bulletins...</div>
+    </div>
+  </section>
+
+  <!-- Additional Sections -->
+  <section class="breaking-news">
+    <h2>Breaking News: Global Economic Shift</h2>
+    <p>Markets react sharply as major economies announce new regulations.</p>
+    <a href="story.html">
+      <button>Read More</button>
+    </a>
+  </section>
+
+  <main class="content-area">
+    <section class="articles">
+   
+      <article class="article-card">
+      <img src="photos/vdmvsashmusy/vdmnashmusy.png"/>
+    <div class="frunt"><h1>After Calling Me Pig, You Dey Find My Help? – VDM Roasts Ashmusy After She Lost ₦33 Million to Scammer</h1>
+        <a href="story0.html">Continue Reading</a></div>
+      </article>
+      <article class="article-card">
+        <img src="photos/cbexsuspects.png" >
+        <div class="frunt"><h1>BREAKING: EFCC Releases Names and Faces of CBEX Scam Suspects</h1>  <a href="story1.html">Continue Reading</a><div>
+      </article>
+      <article class="article-card">
+        <img src="photos/silas.png" alt="silas.png">
+        <div class="frunt"><h1>Meet Silas Adekunle: The Nigerian-Born Tech Genius Behind the World’s First Gaming Robot</h1>
+        <a href="story1.html">Continue Reading</a></div>
+      </article>
+    </section>
+
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="news.html">News</a></li>
+        <li><a href="entertainment.html">Entertainment</a></li> 
+        <li><a href="sport.html">Sports</a></li>
+        <li><a href="health.html">Health</a></li>
+      </ul>
+      <h3>Top Stories</h3>
+      <ul>
+        <li><a href="story6.html">Climate Change Talks 2025</a></li>
+        <li><a href="story7.html">New Tech Startups to Watch</a></li>
+        <li><a href="story8.html">World Leaders Meet in Geneva</a></li>
+      </ul>
+    </aside>
+  </main>
+
+    <footer>
+    <p>&copy; 2025 Naija updates News | All rights reserved.</p>
+  </footer>
+
+  <!-- Theme toggle script -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    const modeLabel = document.getElementById('mode-label');
+
+    function updateModeLabel() {
+      const isDark = document.body.classList.contains('dark');
+      modeLabel.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+    }
+
+    toggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark', toggle.checked);
+      updateModeLabel();
+    });
+
+    window.addEventListener('DOMContentLoaded', updateModeLabel);
+  </script>
+
+  <!-- Firebase + bulletin loading script -->
+  <script>
+    // Firebase config
+    const firebaseConfig = {
+      apiKey: "AIzaSyApTgVgAH2cjEj6WWBELIcIvNmOWDEx3Hk",
+      authDomain: "naija-updates-dbade.firebaseapp.com",
+      databaseURL: "https://naija-updates-dbade-default-rtdb.firebaseio.com",
+      projectId: "naija-updates-dbade",
+      storageBucket: "naija-updates-dbade.appspot.com",
+      messagingSenderId: "444794580005",
+      appId: "1:444794580005:web:0b2f552e79662e37f3a3cc",
+      measurementId: "G-BJY307FPNG"
+    };
+
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    // Reference to the carousel section
+    const carouselTrack = document.getElementById("bulletin-track");
+
+    // Fetch bulletins from Firebase
+    db.ref("bulletins").on("value", (snapshot) => {
+      const bulletins = snapshot.val();
+      if (bulletins) {
+        carouselTrack.innerHTML = "";
+        for (const key in bulletins) {
+          const bulletinItem = document.createElement("div");
+          bulletinItem.className = "carousel-item";
+          bulletinItem.textContent = bulletins[key];
+          carouselTrack.appendChild(bulletinItem);
+        }
+      } else {
+        carouselTrack.innerHTML = "<div class='carousel-item'>No bulletins found.</div>";
+      }
+    });
+  </script>
+
+</body>
+</html>

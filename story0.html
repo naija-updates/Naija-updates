@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DailyScope | VDM Roasts Ashmusy After ₦33 Million Scam</title>
+  <link rel="stylesheet" href="style.css"/>
+
+  <!-- Article-Specific Styling -->
+  <style>
+    .article-card {
+      max-width: 800px;
+      margin: auto;
+      padding: 20px;
+      background: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      line-height: 1.6;
+      font-size: 16px;
+      color: #222;
+    }
+
+    .article-card img {
+      width: 100%;
+      height:25%;
+      object-fit:cover;
+      border-radius: 10px;
+      margin: auto;
+    }
+
+    .article-card h1 {
+      font-size: 20px;
+      margin-bottom: 10px;
+      color: #111;
+    }
+
+    .article-card p {
+      margin-bottom: 16px;
+    }
+
+    .article-card em {
+      color: #555;
+    }
+
+    .share-buttons {
+      margin-top: 20px;
+      display: flex;
+      gap: 15px;
+    }
+
+    .share-buttons a img {
+      width: 30px;
+      height: 30px;
+      transition: transform 0.3s ease;
+    }
+
+    .share-buttons a:hover img {
+      transform: scale(1.1);
+    }
+  </style>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-compat.js"></script>
+</head>
+
+<body>
+  <!-- Header -->
+  <header>
+    <div class="logo">Naija updates</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="entertainment.html">Entertainment</a>
+      <a href="sports.html">Sports</a>
+      <a href="health.html">Health</a>
+    </nav>
+  </header>
+
+
+  <!-- Main Article -->
+  <main class="content-area" style="flex-direction: column;">
+    <article class="article-section">
+      <img src="photos/vdmvsashmusy/vdmnashmusy.png"/>
+      <h1>“After Calling Me Pig, You Dey Find My Help?” – VDM Roasts Ashmusy After She Lost ₦33 Million to Scammer</h1>
+      <p><em>By Naija Updates | April 25, 2025</em></p>
+
+      <p>Wahala no dey finish for social media! This time, controversial social media critic, VeryDarkMan (aka VDM), no gree give peace to popular skit maker Ashmusy, after she reportedly lost a whopping ₦33 million to a scam.</p>
+
+      <p>Yes, you heard right — ₦33 million vanish like puff puff in children’s party!</p>
+
+      <p>According to online gist, Ashmusy cried out recently that one sharp scammer cornered her millions through a fake investment platform. Out of pain and confusion, she reached out to VDM to help expose the person and maybe recover her money.</p>
+
+      <p>But VDM said, “Lailai!”</p>
+
+      <p>Instead of helping, the guy used the opportunity to open his “receipt file” and drag her like small generator. He reminded Ashmusy how she once insulted him and even called him a "pig" when he was criticizing some of her content back then.</p>
+
+      <p>“After you call me pig, na my help you dey find?” VDM fired with his usual savage mouth online. He even posted screenshots and videos to show say na real life drama we dey watch, not skit.</p>
+
+      <p>Na there the internet scatter.</p>
+
+      <p>People come flood the comments section, some laughing, others shouting “serves her right.” Some even say the lesson here be say, “No burn bridge with your helper, especially the one with big mouth and big followers.”</p>
+
+      <p>Ashmusy, on her part, never talk plenty again since VDM clap back. Maybe the ₦33 million loss pain pass the dragging, or maybe she dey plan her own revenge skit — who knows?</p>
+
+      <p>But one thing clear for this whole saga: Social media no be your village square o. Anything you talk fit come back bite you like mosquito.</p>
+
+      <p>For now, VDM don use this chance shine and remind everybody that he still dey watch, and he no dey forget who throw stone first.</p>
+
+      <p><strong>Moral of the story?</strong><br>
+      No insult person today wey fit help you tomorrow — especially when that person na VeryDarkMan with long memory and sharp phone.</p>
+
+      <div class="share-buttons">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=https://your-site.com/this-article" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/145/145802.png" alt="Share on Facebook">
+        </a>
+        <a href="https://twitter.com/intent/tweet?url=https://your-site.com/this-article&text=Check this out!" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/145/145812.png" alt="Share on Twitter">
+        </a>
+        <a href="https://api.whatsapp.com/send?text=https://your-site.com/this-article" target="_blank">
+          <img src="https://cdn-icons-png.flaticon.com/512/733/733585.png" alt="Share on WhatsApp">
+        </a>
+      </div>
+    </article>
+
+    <!-- Comments Section -->
+    <section class="comments">
+      <h3>Leave a Comment</h3>
+      <input type="text" class="comment-name" placeholder="Your Name" />
+      <textarea class="comment-text" placeholder="Your Comment..."></textarea>
+      <button class="cbtn">Post</button>
+      <button id="toggle-all-comments" class="toggle-all-btn">Collapse All Comments</button>
+      <div class="comment-list"></div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 Naija updates News | All rights reserved.</p>
+  </footer>
+
+  <!-- Theme Toggle -->
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider">
+        <span class="icon sun">☀️</span>
+        <span class="icon moon">🌙</span>
+      </span>
+    </label>
+  </div>
+
+  <!-- Theme Script -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark', toggle.checked);
+    });
+  </script>
+
+  <!-- Firebase Script (Keep as-is) -->
+  <script>
+    const firebaseConfig = {
+      apiKey: "AIzaSyApTgVgAH2cjEj6WWBELIcIvNmOWDEx3Hk",
+      authDomain: "naija-updates-dbade.firebaseapp.com",
+      projectId: "naija-updates-dbade",
+      storageBucket: "naija-updates-dbade.appspot.com",
+      messagingSenderId: "444794580005",
+      appId: "1:444794580005:web:0b2f552e79662e37f3a3cc",
+      measurementId: "G-BJY307FPNG"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+    const path = window.location.pathname;
+    const articleId = path.substring(path.lastIndexOf('/') + 1).replace('.html', '');
+
+    let collapsed = false;
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const nameInput = document.querySelector('.comment-name');
+      const commentInput = document.querySelector('.comment-text');
+      const postButton = document.querySelector('.cbtn');
+      const commentList = document.querySelector('.comment-list');
+      const toggleAllBtn = document.getElementById("toggle-all-comments");
+
+      postButton.addEventListener('click', () => {
+        const name = nameInput.value.trim();
+        const comment = commentInput.value.trim();
+
+        if (name && comment) {
+          db.ref('comments/' + articleId).push({
+            name,
+            comment,
+            timestamp: Date.now()
+          }).then(() => {
+            nameInput.value = '';
+            commentInput.value = '';
+          }).catch(error => {
+            console.error('Error posting comment:', error);
+          });
+        } else {
+          alert('Please enter both name and comment.');
+        }
+      });
+
+      db.ref('comments/' + articleId).on('value', snapshot => {
+        commentList.innerHTML = '';
+        const comments = snapshot.val();
+
+        if (comments) {
+          const keys = Object.keys(comments).sort((a, b) => comments[b].timestamp - comments[a].timestamp);
+          keys.forEach(key => {
+            const comment = comments[key];
+            const div = document.createElement('div');
+            div.classList.add('comment');
+            div.style.border = '1px solid #ccc';
+            div.style.padding = '10px';
+            div.style.marginBottom = '10px';
+            div.style.borderRadius = '6px';
+            div.innerHTML = `
+              <strong>${comment.name}</strong><br>
+              <small>${new Date(comment.timestamp).toLocaleString()}</small>
+              <p style="display: ${collapsed ? 'none' : 'block'};">${comment.comment}</p>
+            `;
+            commentList.appendChild(div);
+          });
+        } else {
+          commentList.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
+        }
+      });
+
+      toggleAllBtn.addEventListener("click", () => {
+        collapsed = !collapsed;
+        if (collapsed) {
+          commentList.style.maxHeight = "0";
+          commentList.style.overflow = "hidden";
+          toggleAllBtn.textContent = "Expand Comments";
+        } else {
+          commentList.style.maxHeight = commentList.scrollHeight + "px";
+          toggleAllBtn.textContent = "Collapse Comments";
+        }
+      });
+
+      commentList.style.overflow = "hidden";
+      commentList.style.transition = "max-height 0.5s ease";
+      commentList.style.maxHeight = commentList.scrollHeight + "px";
+    });
+  </script>
+</body>
+</html>

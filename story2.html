@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>DailyScope | Article Title</title>
+  <link rel="stylesheet" href="style.css"/>
+  <!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-compat.js">
+</script>
+
+
+</head>
+<body>
+
+  <!-- Header -->
+ <header>
+    <div class="logo">Naija updates</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="entertainment.html">Entertainment</a>
+      <a href="sports.html">Sports</a>
+      <a href="health.html">Health</a>
+    </nav>
+  </header>
+  <section class="carousel">
+  <div class="carousel-track">
+    <div class="carousel-item">Headline: AI Breakthrough Reshapes Tech</div>
+    <div class="carousel-item">Update: New Laws to Regulate Social Media</div>
+    <div class="carousel-item">Exclusive: Inside the 2025 Election Campaigns</div>
+  </div>
+</section>
+
+  <!-- Article Section -->
+  <main class="content-area" style="flex-direction: column;">
+    <article class="article-card" style="max-width: 800px; margin: 30px auto;">
+      <img src="https://via.placeholder.com/800x400" alt="Feature Image" />
+      <h1 style="margin: 20px 0;">Article Title Goes Here</h1>
+      <p><em>By Author Name | April 23, 2025</em></p>
+      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit...</p>
+      <p>Sed at magna in nulla porttitor ultricies...</p>
+    </article>
+
+    <!-- Comments Section -->
+   
+<section class="comments">
+  <h3>Leave a Comment</h3>
+
+  <input type="text" class="comment-name" placeholder="Your Name" />
+  <textarea class="comment-text" placeholder="Your Comment..."></textarea>
+  <button class="cbtn">Post</button>
+ <button id="toggle-all-comments" class="toggle-all-btn">Collapse All Comments</button>
+  <div class="comment-list"></div>
+</section>
+    
+  </main>
+
+  <!-- Footer -->
+ <footer>
+    <p>&copy; 2025 Naija updates News | All rights reserved.</p>
+  </footer>
+
+  <!-- Theme Toggle -->
+  <div class="theme-switch-wrapper">
+    <label class="theme-switch">
+      <input type="checkbox" id="theme-toggle">
+      <span class="slider">
+        <span class="icon sun">☀️</span>
+        <span class="icon moon">🌙</span>
+      </span>
+    </label>
+  </div>
+
+  <!-- Script for Theme -->
+  <script>
+    const toggle = document.getElementById('theme-toggle');
+    toggle.addEventListener('change', () => {
+      document.body.classList.toggle('dark', toggle.checked);
+    });
+  </script>
+<script>
+  // Firebase config
+  const firebaseConfig = {
+    apiKey: "AIzaSyApTgVgAH2cjEj6WWBELIcIvNmOWDEx3Hk",
+    authDomain: "naija-updates-dbade.firebaseapp.com",
+    projectId: "naija-updates-dbade",
+    storageBucket: "naija-updates-dbade.appspot.com",
+    messagingSenderId: "444794580005",
+    appId: "1:444794580005:web:0b2f552e79662e37f3a3cc",
+    measurementId: "G-BJY307FPNG"
+  };
+
+  // Initialize Firebase
+  firebase.initializeApp(firebaseConfig);
+  const db = firebase.database();
+
+  // Get current page name as article ID (e.g., "story.html" -> "story")
+  const path = window.location.pathname;
+  const articleId = path.substring(path.lastIndexOf('/') + 1).replace('.html', '');
+
+  let collapsed = false;
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const nameInput = document.querySelector('.comment-name');
+    const commentInput = document.querySelector('.comment-text');
+    const postButton = document.querySelector('.cbtn');
+    const commentList = document.querySelector('.comment-list');
+    const toggleAllBtn = document.getElementById("toggle-all-comments");
+
+    postButton.addEventListener('click', () => {
+      const name = nameInput.value.trim();
+      const comment = commentInput.value.trim();
+
+      if (name && comment) {
+        db.ref('comments/' + articleId).push({
+          name,
+          comment,
+          timestamp: Date.now()
+        }).then(() => {
+          nameInput.value = '';
+          commentInput.value = '';
+        }).catch(error => {
+          console.error('Error posting comment:', error);
+        });
+      } else {
+        alert('Please enter both name and comment.');
+      }
+    });
+
+    db.ref('comments/' + articleId).on('value', snapshot => {
+      commentList.innerHTML = '';
+      const comments = snapshot.val();
+
+      if (comments) {
+        const keys = Object.keys(comments).sort((a, b) => comments[b].timestamp - comments[a].timestamp);
+        keys.forEach(key => {
+          const comment = comments[key];
+          const div = document.createElement('div');
+          div.classList.add('comment');
+          div.style.border = '1px solid #ccc';
+          div.style.padding = '10px';
+          div.style.marginBottom = '10px';
+          div.style.borderRadius = '6px';
+          div.innerHTML = `
+            <strong>${comment.name}</strong><br>
+            <small>${new Date(comment.timestamp).toLocaleString()}</small>
+            <p style="display: ${collapsed ? 'none' : 'block'};">${comment.comment}</p>
+          `;
+          commentList.appendChild(div);
+        });
+      } else {
+        commentList.innerHTML = '<p>No comments yet. Be the first to comment!</p>';
+      }
+    });
+
+    // Collapse/Expand comments
+    toggleAllBtn.addEventListener("click", () => {
+      collapsed = !collapsed;
+
+      if (collapsed) {
+        commentList.style.maxHeight = "0";
+        commentList.style.overflow = "hidden";
+        toggleAllBtn.textContent = "Expand Comments";
+      } else {
+        commentList.style.maxHeight = commentList.scrollHeight + "px";
+        toggleAllBtn.textContent = "Collapse Comments";
+      }
+    });
+
+    // Smooth transition
+    commentList.style.overflow = "hidden";
+    commentList.style.transition = "max-height 0.5s ease";
+    commentList.style.maxHeight = commentList.scrollHeight + "px";
+  });
+</script>
+</body>
+</html>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naija updates</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">Naija updates</div>
+    <nav class="nav-links">
+      <a href="#">Home</a>
+      <a href="#">News</a>
+      <a href="#">Entertainment</a>
+      <a href="#">Sports</a>
+      <a href="#">Health</a>
+    </nav>
+  </header>
+ <div class="theme-switch-wrapper">
+  <label class="theme-switch">
+    <input type="checkbox" id="theme-toggle">
+    <span class="slider"></span>
+  </label>
+  <div class="mode-label" id="mode-label">Light Mode</div>
+</div>
+<section class="carousel">
+  <div class="carousel-track">
+    <div class="carousel-item">Headline: AI Breakthrough Reshapes Tech</div>
+    <div class="carousel-item">Update: New Laws to Regulate Social Media</div>
+    <div class="carousel-item">Exclusive: Inside the 2025 Election Campaigns</div>
+  </div>
+</section>
+
+  <section class="breaking-news">
+    <h2>Breaking News: Global Economic Shift</h2>
+    <p>Markets react sharply as major economies announce new regulations.</p>
+  <a href="story.html">
+  <button>Read More</button>
+</a>
+  </section>
+
+  <main class="content-area">
+    <section class="articles">
+      <article class="article-card">
+        <img src="https://via.placeholder.com/300x200" alt="Article image">
+        <h3>Innovation in AI: What’s Next?</h3>
+        <p>Experts predict the next wave of intelligent technology that could change the world by 2030.</p>
+        <a href="story9.html">Continue Reading</a>
+      </article>
+
+      <article class="article-card">
+        <img src="https://via.placeholder.com/300x200" alt="Article image">
+        <h3>Healthcare: New Vaccines on the Horizon</h3>
+        <p>Major pharmaceutical breakthroughs bring hope to millions worldwide.</p>
+        <a href="story0.html">Continue Reading</a>
+      </article>
+
+      <article class="article-card">
+        <img src="https://via.placeholder.com/300x200" alt="Article image">
+        <h3>Politics: Elections 2025 Analysis</h3>
+        <p>A closer look at the changing political landscape and what it means for voters.</p>
+        <a href="story1.html">Continue Reading</a>
+      </article>
+    </section>
+
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="story2.html">news</a></li>
+        <li><a href="story3.html">Entertainment</a></li> 
+        <li><a href="story4.html">Sports</a></li>
+        <li><a href="story5.html">Health</a></li>
+      </ul>
+
+      <h3>Top Stories</h3>
+      <ul>
+        <li><a href="story6.html">Climate Change Talks 2025</a></li>
+        <li><a href="story7.html">New Tech Startups to Watch</a></li>
+        <li><a href="story8.html">World Leaders Meet in Geneva</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 DailyScope News | All rights reserved.</p>
+  </footer>
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const modeLabel = document.getElementById('mode-label');
+
+  function updateModeLabel() {
+    const isDark = document.body.classList.contains('dark');
+    modeLabel.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+  }
+
+  toggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', toggle.checked);
+    updateModeLabel();
+  });
+
+  // Set initial mode label on page load
+  window.addEventListener('DOMContentLoaded', updateModeLabel);
+</script>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Naija updates</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <header>
+    <div class="logo">Naija updates</div>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="news.html">News</a>
+      <a href="entertainment.html">Entertainment</a>
+      <a href="sports.html">Sports</a>
+      <a href="health.html">Health</a>
+    </nav>
+  </header>
+ <div class="theme-switch-wrapper">
+  <label class="theme-switch">
+    <input type="checkbox" id="theme-toggle">
+    <span class="slider"></span>
+  </label>
+  <div class="mode-label" id="mode-label">Light Mode</div>
+</div>
+<section class="carousel">
+  <div class="carousel-track">
+    <div class="carousel-item">Headline: AI Breakthrough Reshapes Tech</div>
+    <div class="carousel-item">Update: New Laws to Regulate Social Media</div>
+    <div class="carousel-item">Exclusive: Inside the 2025 Election Campaigns</div>
+  </div>
+</section>
+
+  <section class="breaking-news">
+    <h2>Breaking News: Global Economic Shift</h2>
+    <p>Markets react sharply as major economies announce new regulations.</p>
+  <a href="story.html">
+  <button>Read More</button>
+</a>
+  </section>
+
+  <main class="content-area">
+    <section class="articles">
+      <article class="article-card">
+        <img src="https://via.placeholder.com/300x200" alt="Article image">
+        <h3>Innovation in AI: What’s Next?</h3>
+        <p>Experts predict the next wave of intelligent technology that could change the world by 2030.</p>
+        <a href="story9.html">Continue Reading</a>
+      </article>
+
+      <article class="article-card">
+        <img src="https://via.placeholder.com/300x200" alt="Article image">
+        <h3>Healthcare: New Vaccines on the Horizon</h3>
+        <p>Major pharmaceutical breakthroughs bring hope to millions worldwide.</p>
+        <a href="story0.html">Continue Reading</a>
+      </article>
+
+      <article class="article-card">
+        <img src="https://via.placeholder.com/300x200" alt="Article image">
+        <h3>Politics: Elections 2025 Analysis</h3>
+        <p>A closer look at the changing political landscape and what it means for voters.</p>
+        <a href="story1.html">Continue Reading</a>
+      </article>
+    </section>
+
+    <aside class="sidebar">
+      <h3>Categories</h3>
+      <ul>
+        <li><a href="news.html">news</a></li>
+        <li><a href="entertainment.html">Entertainment</a></li> 
+        <li><a href="sport.html">Sports</a></li>
+        <li><a href="health.html">Health</a></li>
+      </ul>
+
+      <h3>Top Stories</h3>
+      <ul>
+        <li><a href="story6.html">Climate Change Talks 2025</a></li>
+        <li><a href="story7.html">New Tech Startups to Watch</a></li>
+        <li><a href="story8.html">World Leaders Meet in Geneva</a></li>
+      </ul>
+    </aside>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Naija updates News | All rights reserved.</p>
+  </footer>
+<script>
+  const toggle = document.getElementById('theme-toggle');
+  const modeLabel = document.getElementById('mode-label');
+
+  function updateModeLabel() {
+    const isDark = document.body.classList.contains('dark');
+    modeLabel.textContent = isDark ? 'Dark Mode' : 'Light Mode';
+  }
+
+  toggle.addEventListener('change', () => {
+    document.body.classList.toggle('dark', toggle.checked);
+    updateModeLabel();
+  });
+
+  // Set initial mode label on page load
+  window.addEventListener('DOMContentLoaded', updateModeLabel);
+</script>
+</body>
+</html>
